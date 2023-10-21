@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_ddd/features/home_page/presentation/home_screen.dart';
 import 'package:riverpod_ddd/features/login_page/presentation/login_screen.dart';
+import 'package:riverpod_ddd/features/registration_screen/presentation/registration_screen.dart';
 import 'package:riverpod_ddd/features/splash_screen/presentation/splash_screen.dart';
 import 'package:riverpod_ddd/flavor/flavor.dart';
 import 'package:riverpod_ddd/local_cache/cache_provider.dart';
@@ -29,6 +30,12 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: LoginScreen.path,
         name: LoginScreen.name,
         builder: (BuildContext context, GoRouterState state) => LoginScreen(),
+      ),
+      GoRoute(
+        path: RegistrationScreen.path,
+        name: RegistrationScreen.name,
+        builder: (BuildContext context, GoRouterState state) =>
+            RegistrationScreen(),
       ),
       GoRoute(
         path: HomeScreen.path,
@@ -84,6 +91,7 @@ class RouterNotifier extends ChangeNotifier {
   List<String> nonAuthedList = [
     SplashScreen.path,
     LoginScreen.path,
+    RegistrationScreen.path,
     '/nonAuthPage1',
     '/nonAuthPage2',
     '/nonAuthPage3',

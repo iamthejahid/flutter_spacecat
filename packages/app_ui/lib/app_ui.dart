@@ -11,6 +11,7 @@ export 'package:gap/gap.dart';
 export 'package:flutter/material.dart';
 export 'src/widgets/k_widgets/k_widgets.dart';
 export 'src/images.dart';
+export 'src/widgets/check_box.dart';
 
 export 'package:google_fonts/google_fonts.dart';
 export 'package:image_picker/image_picker.dart';
