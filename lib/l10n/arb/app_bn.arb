@@ -5,5 +5,7 @@
   },
   "counterAppBarTitle": "Contador",
   "login": "লগইন",
-  "not_registered": "নিবন্ধিত নন? নিবন্ধন করুন"
+  "not_registered": "নিবন্ধিত নন? নিবন্ধন করুন",
+  "password": "পাসওয়ার্ড",
+  "phoneNumber": "ফোন নাম্বার"
 }

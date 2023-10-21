@@ -5,5 +5,7 @@
   },
   "counterAppBarTitle": "Counter",
   "login": "تسجيل الدخول",
-  "not_registered": "غير مسجّل؟ سجّل"
+  "not_registered": "غير مسجّل؟ سجّل",
+  "password": "كلمة المرور",
+  "phoneNumber": "\"رقم الهاتف"
 }

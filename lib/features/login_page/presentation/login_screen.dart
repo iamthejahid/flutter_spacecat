@@ -44,6 +44,7 @@ class LoginScreen extends HookConsumerWidget {
                   child: LanguageSelectorWidget()),
               gap48,
               AppTextField(
+                hintText: context.l10n.phoneNumber,
                 controller: phoneController,
                 formFieldKey: phoneControllerKey,
                 validator: (v) => TextInputValidator().phone(v),
@@ -51,6 +52,7 @@ class LoginScreen extends HookConsumerWidget {
               ),
               gap4,
               AppTextField(
+                hintText: context.l10n.password,
                 controller: passwordController,
                 formFieldKey: passwordControllerKey,
                 obSecureText: true,

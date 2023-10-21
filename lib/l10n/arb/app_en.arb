@@ -5,5 +5,7 @@
   },
   "counterAppBarTitle": "Counter",
   "login": "Login",
-  "not_registered": "Not Registered? Sign up"
+  "not_registered": "Not Registered? Sign up",
+  "password": "Password",
+  "phoneNumber": "Phone number"
 }
