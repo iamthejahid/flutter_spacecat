@@ -4,9 +4,11 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:mac_address/mac_address.dart';
+import 'package:riverpod_ddd/core/widgets/locale_switch.dart';
 import 'package:riverpod_ddd/core/widgets/theme_widget.dart';
 import 'package:riverpod_ddd/features/login_page/presentation/login_state_notifier.dart';
 import 'package:riverpod_ddd/features/registration_screen/presentation/registration_screen.dart';
+import 'package:riverpod_ddd/l10n/l10n.dart';
 
 class LoginScreen extends HookConsumerWidget {
   LoginScreen({super.key});
@@ -26,13 +28,20 @@ class LoginScreen extends HookConsumerWidget {
         useMemoized(() => GlobalKey<FormFieldState<String>>());
 
     return Scaffold(
-      appBar: const KAppBar(titleText: 'Login'),
+      appBar: KAppBar(
+        titleText: context.l10n.login,
+        actions: [
+          ThemeSwitch(),
+        ],
+      ),
       body: Center(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 8.h),
           child: Column(
             children: [
-              ThemeSwitch(),
+              Align(
+                  alignment: Alignment.centerRight,
+                  child: LanguageSelectorWidget()),
               gap48,
               AppTextField(
                 controller: phoneController,
@@ -76,7 +85,7 @@ class LoginScreen extends HookConsumerWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('Login'),
+                    Text(context.l10n.login),
                     gap10,
                     if (sTate.isLoading)
                       Padding(
@@ -94,7 +103,7 @@ class LoginScreen extends HookConsumerWidget {
               InkWell(
                 onTap: () => context.pushReplacement(RegistrationScreen.path),
                 child: Text(
-                  'Not Registered? Sign up',
+                  context.l10n.not_registered,
                   style: UITextStyle.bodyText1,
                 ),
               ),

@@ -1,0 +1,9 @@
+{
+  "@@locale": "bn",
+  "@counterAppBarTitle": {
+    "description": "Texto mostrado en la AppBar de la página del contador"
+  },
+  "counterAppBarTitle": "Contador",
+  "login": "লগইন",
+  "not_registered": "নিবন্ধিত নন? নিবন্ধন করুন"
+}

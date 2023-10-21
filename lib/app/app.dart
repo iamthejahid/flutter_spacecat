@@ -2,10 +2,10 @@ import 'package:app_ui/app_ui.dart';
 import 'package:app_utils/app_utils.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_ddd/core/widgets/locale_switch.dart';
 import 'package:riverpod_ddd/core/widgets/theme_widget.dart';
 import 'package:riverpod_ddd/flavor/flavor.dart';
 import 'package:riverpod_ddd/l10n/l10n.dart';
-import 'package:riverpod_ddd/local_cache/cache_provider.dart';
 import 'package:riverpod_ddd/router/app_route.dart';
 
 class App extends ConsumerWidget {
@@ -14,7 +14,7 @@ class App extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(routerProvider);
-    final localCacheData = ref.watch(hiveProvider);
+    final localeProvider = ref.watch(localeNotifierProvider);
     final themeProvider = ref.watch(themeNotifierProvider);
 
     return ScreenUtilInit(
@@ -42,7 +42,7 @@ class App extends ConsumerWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: context.allSupportedLocale,
-          locale: Locale(localCacheData.locale),
+          locale: Locale(localeProvider),
         ),
       ),
       designSize: const Size(187.5, 406),

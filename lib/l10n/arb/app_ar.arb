@@ -1,9 +1,9 @@
 {
-  "@@locale": "en",
+  "@@locale": "ar",
   "@counterAppBarTitle": {
     "description": "Text shown in the AppBar of the Counter Page"
   },
   "counterAppBarTitle": "Counter",
-  "login": "Login",
-  "not_registered": "Not Registered? Sign up"
+  "login": "تسجيل الدخول",
+  "not_registered": "غير مسجّل؟ سجّل"
 }

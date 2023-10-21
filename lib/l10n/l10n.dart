@@ -9,5 +9,6 @@ extension AppLocalizationsX on BuildContext {
   List<Locale> get allSupportedLocale => [
         const Locale('en'), // English
         const Locale('bn'), // Bangla
+        const Locale('ar'), // Arabic
       ];
 }
