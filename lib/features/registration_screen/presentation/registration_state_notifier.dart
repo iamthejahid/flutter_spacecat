@@ -9,7 +9,7 @@ import 'package:riverpod_ddd/features/registration_screen/presentation/registrat
 import 'package:riverpod_ddd/local_cache/cache_provider.dart';
 import 'package:riverpod_ddd/router/app_route.dart';
 
-final loginProvider =
+final registrationProvider =
     StateNotifierProvider<RegistrationStateNotifier, RegistrationState>((ref) {
   return RegistrationStateNotifier(domain: sl(), ref: ref);
 });

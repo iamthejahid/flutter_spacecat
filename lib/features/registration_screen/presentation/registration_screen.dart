@@ -7,6 +7,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:intl/intl.dart';
 import 'package:mac_address/mac_address.dart';
 import 'package:riverpod_ddd/features/login_page/presentation/login_state_notifier.dart';
+import 'package:riverpod_ddd/features/registration_screen/presentation/registration_state_notifier.dart';
 
 class RegistrationScreen extends HookConsumerWidget {
   RegistrationScreen({super.key});
@@ -15,8 +16,8 @@ class RegistrationScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final controller = ref.read(loginProvider.notifier);
-    final sTate = ref.watch(loginProvider);
+    final controller = ref.read(registrationProvider.notifier);
+    final sTate = ref.watch(registrationProvider);
 
     final phoneController = useTextEditingController();
     final passwordController = useTextEditingController();
