@@ -52,4 +52,12 @@ class CacheHandlerI implements CacheHandler {
 
   @override
   void cleanBox() => _cacheBox.clear();
+
+  @override
+  void setThemeData({required bool isWhite}) =>
+      put(KCacheTags.themeData, isWhite ? "white" : "dark");
+
+  @override
+  String get themeData =>
+      get(KCacheTags.themeData, defaultValue: 'white') ?? 'white';
 }

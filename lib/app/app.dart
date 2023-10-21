@@ -25,7 +25,9 @@ class App extends ConsumerWidget {
           themeMode: ThemeMode.light,
 
           /// There will be a flex theme soon!
-          theme: const AppTheme().themeData,
+          theme: localCacheData.themeData == "dark"
+              ? const AppDarkTheme().themeData
+              : const AppTheme().themeData,
 
           debugShowCheckedModeBanner:
               BuildConfig.instance.environment != Environment.PRODUCTION,
