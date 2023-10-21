@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:app_ui/app_ui.dart';
 import 'package:app_utils/app_utils.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -36,21 +38,22 @@ class RegistrationScreen extends HookConsumerWidget {
 
     final dobController = useTextEditingController();
 
+    final address = useTextEditingController();
+    final addressKey = useMemoized(() => GlobalKey<FormFieldState<String>>());
+
+    final rePassword = useTextEditingController();
+    final rePasswordKey =
+        useMemoized(() => GlobalKey<FormFieldState<String>>());
+
     // Country
 
     // Division id
 
     // district Id
 
-    // Address
-
-    final rePassword = useTextEditingController();
-    final rePasswordKey =
-        useMemoized(() => GlobalKey<FormFieldState<String>>());
-
     // mac address
 
-    // Profile photo
+    File? imageFile;
 
     return Scaffold(
       appBar: const KAppBar(titleText: 'Registration'),
@@ -59,7 +62,11 @@ class RegistrationScreen extends HookConsumerWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              gap48,
+              gap16,
+              ImagePickerAvatar(
+                onSave: (v) => imageFile = v,
+              ),
+              gap8,
               AppTextField(
                 hintText: "Name",
                 controller: nameController,
@@ -99,7 +106,8 @@ class RegistrationScreen extends HookConsumerWidget {
                 controller: rePassword,
                 formFieldKey: rePasswordKey,
                 obSecureText: true,
-                validator: (v) => TextInputValidator().password(v),
+                validator: (v) => TextInputValidator()
+                    .confirmPassword(v, passwordController.text),
                 onChanged: (v) => rePasswordKey.currentState!.validate(),
               ),
               gap4,
@@ -133,6 +141,14 @@ class RegistrationScreen extends HookConsumerWidget {
                 },
               ),
               gap8,
+              AppTextField(
+                hintText: "Address",
+                controller: address,
+                formFieldKey: addressKey,
+                validator: (v) => TextInputValidator().name(v),
+                onChanged: (v) => addressKey.currentState!.validate(),
+              ),
+              gap8,
               SizedBox(
                 child: Column(
                   children: genders
@@ -155,6 +171,16 @@ class RegistrationScreen extends HookConsumerWidget {
                 ),
               ),
               gap4,
+              DropdownButton<String>(
+                value: "Bangladesh",
+                onChanged: (String? newValue) {},
+                items: ["Bangladesh"].map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+              ),
               FilledButton(
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
@@ -181,7 +207,7 @@ class RegistrationScreen extends HookConsumerWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('Login'),
+                    const Text('registration'),
                     gap10,
                     if (sTate.isLoading)
                       Padding(

@@ -8,6 +8,7 @@ class SplashScreen extends ConsumerWidget {
   static String get name => '/splashScreen';
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // ignore: unused_local_variable
     final sTate = ref.watch(splashNotifierProvider);
 
     return Scaffold(
