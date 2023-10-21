@@ -2,6 +2,7 @@ import 'package:app_ui/app_ui.dart';
 import 'package:app_utils/app_utils.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:intl/intl.dart';
 import 'package:mac_address/mac_address.dart';
 import 'package:riverpod_ddd/features/login_page/presentation/login_state_notifier.dart';
 
@@ -33,11 +34,9 @@ class RegistrationScreen extends HookConsumerWidget {
     final selectedGender = useState("");
     final genders = ["Male", "Female"];
 
+    final dobController = useTextEditingController();
+
     // Country
-
-    // Gender
-
-    // DOB
 
     // Division id
 
@@ -104,6 +103,36 @@ class RegistrationScreen extends HookConsumerWidget {
                 onChanged: (v) => rePasswordKey.currentState!.validate(),
               ),
               gap4,
+              TextField(
+                controller:
+                    dobController, // Editing controller of this TextField
+                decoration: InputDecoration(
+                  hintText: "Date of birth",
+                  suffix: Icon(Icons.date_range), // Icon of text field
+                ),
+                readOnly:
+                    true, // Set it to true, so that the user will not be able to edit text
+
+                onTap: () async {
+                  DateTime? selectedDate = await showDatePicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime(2000),
+                    lastDate: DateTime(2101),
+                  );
+
+                  if (selectedDate != null) {
+                    String formattedDate =
+                        DateFormat('yyyy-MM-dd').format(selectedDate);
+
+                    dobController.text =
+                        formattedDate; // Set the value of the text field.
+                  } else {
+                    print("Date is not selected");
+                  }
+                },
+              ),
+              gap8,
               SizedBox(
                 child: Column(
                   children: genders
@@ -111,14 +140,21 @@ class RegistrationScreen extends HookConsumerWidget {
                         (e) => CustomCheckBox(
                           checkBoxTitle: e,
                           value: e,
-                          isSelected: selectedGender == e,
-                          onSelect: (v) => print(v),
-                          onRemove: () => selectedGender.value = "",
+                          isSelected: selectedGender.value == e,
+                          onSelect: (v) => {
+                            if (v == selectedGender.value)
+                              {
+                                selectedGender.value = "",
+                              }
+                            else
+                              {selectedGender.value = v}
+                          },
                         ),
                       )
                       .toList(),
                 ),
               ),
+              gap4,
               FilledButton(
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
