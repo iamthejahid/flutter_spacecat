@@ -3,12 +3,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class KLoadingScaffold extends HookConsumerWidget {
   const KLoadingScaffold({
-    Key? key,
+    required this.loading,
+    super.key,
     this.appBar,
     this.body,
     this.bottomNavigationBar,
-    required this.loading,
-  }) : super(key: key);
+  });
 
   final PreferredSizeWidget? appBar;
   final Widget? body;

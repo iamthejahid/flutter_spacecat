@@ -3,9 +3,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class KTextDivider extends HookConsumerWidget {
   const KTextDivider({
+    required this.text,
     super.key,
     this.padding = EdgeInsets.zero,
-    required this.text,
   });
 
   final EdgeInsetsGeometry padding;
@@ -34,7 +34,7 @@ class KTextDivider extends HookConsumerWidget {
               thickness: 1.1,
               color: AppColors.harrisonGrey600,
             ),
-          )
+          ),
         ],
       ),
     );

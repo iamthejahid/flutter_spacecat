@@ -2,15 +2,15 @@ import 'package:app_ui/app_ui.dart';
 
 class KShadowContainer extends StatelessWidget {
   const KShadowContainer({
-    Key? key,
     required this.child,
+    super.key,
     this.borderRadius = const BorderRadius.all(Radius.circular(10)),
     this.blurRadius = 10,
     this.padding = EdgeInsets.zero,
     this.onTap,
     this.height,
     this.width,
-  }) : super(key: key);
+  });
 
   final double? height;
   final double? width;
@@ -79,7 +79,6 @@ class KShadowContainer extends StatelessWidget {
           BoxShadow(
             color: const Color(0xffa6abbd).withOpacity(.35),
             blurRadius: blurRadius,
-            spreadRadius: 0,
             offset: const Offset(5, 5),
           ),
           // BoxShadow(

@@ -1,14 +1,15 @@
 import 'package:app_ui/app_ui.dart';
 
 class KTitleText extends StatelessWidget {
-  const KTitleText(this.title,
-      {Key? key,
-      this.fontSize,
-      this.fontWeight,
-      this.fontColor,
-      this.style,
-      this.maxLines})
-      : super(key: key);
+  const KTitleText(
+    this.title, {
+    super.key,
+    this.fontSize,
+    this.fontWeight,
+    this.fontColor,
+    this.style,
+    this.maxLines,
+  });
 
   final String title;
   final double? fontSize;

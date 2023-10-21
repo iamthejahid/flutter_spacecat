@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 class KTextButton extends StatelessWidget {
   const KTextButton({
-    Key? key,
     required this.child,
     required this.onPressed,
+    super.key,
     this.borderRadius = BorderRadius.zero,
     this.padding = EdgeInsets.zero,
     this.style,
-  }) : super(key: key);
+  });
 
   final Widget child;
   final VoidCallback? onPressed;
@@ -19,15 +19,16 @@ class KTextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-        style: ButtonStyle(
-          padding: MaterialStateProperty.all(padding),
-          shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: borderRadius,
-            ),
+      style: ButtonStyle(
+        padding: MaterialStateProperty.all(padding),
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: borderRadius,
           ),
         ),
-        onPressed: () => onPressed,
-        child: child);
+      ),
+      onPressed: () => onPressed,
+      child: child,
+    );
   }
 }
