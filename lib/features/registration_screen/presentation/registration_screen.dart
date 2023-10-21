@@ -181,6 +181,28 @@ class RegistrationScreen extends HookConsumerWidget {
                   );
                 }).toList(),
               ),
+              gap4,
+              DropdownButton<String>(
+                value: "Bangladesh",
+                onChanged: (String? newValue) {},
+                items: ["Bangladesh"].map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+              ),
+              gap4,
+              DropdownButton<String>(
+                value: "Bangladesh",
+                onChanged: (String? newValue) {},
+                items: ["Bangladesh"].map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+              ),
               FilledButton(
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
