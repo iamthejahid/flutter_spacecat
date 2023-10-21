@@ -28,8 +28,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: LoginScreen.path,
         name: LoginScreen.name,
-        builder: (BuildContext context, GoRouterState state) =>
-            const LoginScreen(),
+        builder: (BuildContext context, GoRouterState state) => LoginScreen(),
       ),
       GoRoute(
         path: HomeScreen.path,

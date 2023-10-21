@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 /// A text field component based on material [TextFormField] widget with a
 /// fixed, left-aligned label text displayed above the text field.
 /// {@endtemplate}
-class AppTextField extends StatelessWidget {
+class AppTextField extends StatefulWidget {
   /// {@macro app_text_field}
   const AppTextField({
     super.key,
@@ -23,6 +23,9 @@ class AppTextField extends StatelessWidget {
     this.onChanged,
     this.onSubmitted,
     this.onTap,
+    this.obSecureText = false,
+    this.formFieldKey,
+    this.validator,
   });
 
   /// A value to initialize the field to.
@@ -74,6 +77,27 @@ class AppTextField extends StatelessWidget {
   /// Called when the text field has been tapped.
   final VoidCallback? onTap;
 
+  /// For obsecuring
+  final bool obSecureText;
+
+  final GlobalKey<FormFieldState>? formFieldKey;
+  final FormFieldValidator<String>? validator;
+
+  @override
+  State<AppTextField> createState() => _AppTextFieldState();
+}
+
+class _AppTextFieldState extends State<AppTextField> {
+  bool isObSecure = false;
+
+  toggleObsecure() => setState(() => isObSecure = !isObSecure);
+
+  @override
+  void initState() {
+    isObSecure = widget.obSecureText;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -83,24 +107,32 @@ class AppTextField extends StatelessWidget {
         ConstrainedBox(
           constraints: const BoxConstraints(minHeight: 80),
           child: TextFormField(
-            key: key,
-            initialValue: initialValue,
-            controller: controller,
-            inputFormatters: inputFormatters,
-            keyboardType: keyboardType,
-            autocorrect: autocorrect,
-            readOnly: readOnly,
-            autofillHints: autoFillHints,
+            key: widget.formFieldKey,
+            initialValue: widget.initialValue,
+            controller: widget.controller,
+            inputFormatters: widget.inputFormatters,
+            keyboardType: widget.keyboardType,
+            autocorrect: widget.autocorrect,
+            readOnly: widget.readOnly,
+            autofillHints: widget.autoFillHints,
             cursorColor: AppColors.darkAqua,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.w500,
                 ),
-            onFieldSubmitted: onSubmitted,
+            onFieldSubmitted: widget.onSubmitted,
             decoration: InputDecoration(
-              hintText: hintText,
-              errorText: errorText,
-              prefixIcon: prefix,
-              suffixIcon: suffix,
+              hintText: widget.hintText,
+              errorText: widget.errorText,
+              prefixIcon: widget.prefix,
+              suffixIcon: widget.obSecureText
+                  ? isObSecure
+                      ? IconButton(
+                          onPressed: toggleObsecure,
+                          icon: Icon(Icons.visibility_off_rounded))
+                      : IconButton(
+                          onPressed: toggleObsecure,
+                          icon: Icon(Icons.remove_red_eye))
+                  : widget.suffix,
               suffixIconConstraints: const BoxConstraints.tightFor(
                 width: 32,
                 height: 32,
@@ -109,8 +141,10 @@ class AppTextField extends StatelessWidget {
                 width: 48,
               ),
             ),
-            onChanged: onChanged,
-            onTap: onTap,
+            onChanged: widget.onChanged,
+            onTap: widget.onTap,
+            obscureText: isObSecure,
+            validator: widget.validator,
           ),
         ),
       ],

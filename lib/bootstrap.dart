@@ -1,9 +1,7 @@
 // ignore_for_file: noop_primitive_operations, always_use_package_imports
 
 import 'dart:async';
-import 'dart:convert';
 import 'dart:developer';
-import 'dart:io';
 
 import 'package:api_client/api_client.dart';
 import 'package:flutter/material.dart';
@@ -65,25 +63,25 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   // You can use any of bellowed API handler.
 
   // API HANDLER :: 01
-  // NetworkHandler.instance.setup(
-  //   baseUrl: BuildConfig.instance.config.baseUrl,
-  // );
-
-  const username = 'mobile';
-  const password = 'secret';
-
-  // API HANDLER :: 02
-  ApiHandler.instance.setUp(
-    setupConfiguration: BaseOptions(
-      baseUrl: BuildConfig.instance.config.baseUrl,
-    ),
-    basicHeaderPart: {
-      HttpHeaders.authorizationHeader:
-          "Basic ${base64Encode(utf8.encode("$username:$password"))}",
-    },
-    token: '',
-    interceptor: CustomInterceptors(),
+  NetworkHandler.instance.setup(
+    baseUrl: BuildConfig.instance.config.baseUrl,
   );
+
+  // const username = 'mobile';
+  // const password = 'secret';
+
+  // // API HANDLER :: 02
+  // ApiHandler.instance.setUp(
+  //   setupConfiguration: BaseOptions(
+  //     baseUrl: BuildConfig.instance.config.baseUrl,
+  //   ),
+  //   basicHeaderPart: {
+  //     HttpHeaders.authorizationHeader:
+  //         "Basic ${base64Encode(utf8.encode("$username:$password"))}",
+  //   },
+  //   token: '',
+  //   interceptor: CustomInterceptors(),
+  // );
 
   await di.init();
 

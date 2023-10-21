@@ -3,7 +3,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter_easylogger/flutter_logger.dart';
+import 'package:app_utils/app_utils.dart';
 
 import 'package:riverpod_ddd/core/network/network.dart';
 
@@ -425,6 +425,11 @@ class NetworkHandler {
 
       Logger.e('body: ${response.body}');
       Logger.e('status code: ${response.statusCode}');
+
+      final e = jsonDecode(response.body);
+      if (e["message"] != null) {
+        Toaster.errorToast(warningMessage: e["message"].toString());
+      }
 
       return left(
         CleanFailure.withData(
