@@ -1,8 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:riverpod_ddd/local_cache/cache_abstract.dart';
 import 'package:riverpod_ddd/local_cache/cache_tags.dart';
 
-class CacheHandlerI implements CacheHandler {
+class CacheHandlerI with ChangeNotifier implements CacheHandler {
   // CacheHandlerI();
 
   late Box<dynamic> _cacheBox;

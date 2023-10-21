@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:mac_address/mac_address.dart';
+import 'package:riverpod_ddd/core/widgets/theme_widget.dart';
 import 'package:riverpod_ddd/features/login_page/presentation/login_state_notifier.dart';
 import 'package:riverpod_ddd/features/registration_screen/presentation/registration_screen.dart';
 
@@ -31,6 +32,7 @@ class LoginScreen extends HookConsumerWidget {
           padding: EdgeInsets.symmetric(horizontal: 8.h),
           child: Column(
             children: [
+              ThemeSwitch(),
               gap48,
               AppTextField(
                 controller: phoneController,

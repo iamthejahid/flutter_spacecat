@@ -2,6 +2,7 @@ import 'package:app_ui/app_ui.dart';
 import 'package:app_utils/app_utils.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_ddd/core/widgets/theme_widget.dart';
 import 'package:riverpod_ddd/flavor/flavor.dart';
 import 'package:riverpod_ddd/l10n/l10n.dart';
 import 'package:riverpod_ddd/local_cache/cache_provider.dart';
@@ -14,6 +15,8 @@ class App extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(routerProvider);
     final localCacheData = ref.watch(hiveProvider);
+    final themeProvider = ref.watch(themeNotifierProvider);
+
     return ScreenUtilInit(
       minTextAdapt: true,
       builder: (_, c) => DismissKeyboard(
@@ -25,7 +28,7 @@ class App extends ConsumerWidget {
           themeMode: ThemeMode.light,
 
           /// There will be a flex theme soon!
-          theme: localCacheData.themeData == "dark"
+          theme: themeProvider == "dark"
               ? const AppDarkTheme().themeData
               : const AppTheme().themeData,
 
