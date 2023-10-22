@@ -34,12 +34,12 @@ class LoginStateNotifier extends StateNotifier<LoginState> {
         state.copyWith(
           userProfileModel: UserProfileModel(
             userName: success.userName,
-            accesToken: success.accesToken,
+            token: success.token,
             refreshToken: success.refreshToken,
           ),
         ),
       );
-      _ref.watch(hiveProvider).setToken(token: success.accesToken);
+      _ref.watch(hiveProvider).setToken(token: success.token.token!);
       // await Future.delayed(Duration(seconds: 3));
       _ref.watch(routerProvider).goNamed(HomeScreen.name);
     });

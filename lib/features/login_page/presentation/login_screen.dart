@@ -74,7 +74,10 @@ class LoginScreen extends HookConsumerWidget {
                                 false) &&
                             (passwordControllerKey.currentState?.isValid ??
                                 false)) {
-                          final macAddress = await await GetMac.macAddress;
+                          String macAddress = await await GetMac.macAddress;
+                          if (macAddress.isEmpty) {
+                            macAddress = "dummy_data";
+                          }
                           Map<String, dynamic> body = {
                             "phone": phoneController.text,
                             "password": passwordController.text,
