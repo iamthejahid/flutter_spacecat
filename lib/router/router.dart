@@ -79,6 +79,7 @@ class RouterNotifier extends ChangeNotifier {
     _ref.watch(hiveProvider).getCacheBox().watch().listen((_) {
       if (_.key == KCacheTags.token || _.deleted) {
         _isLoggedIn = _ref.watch(hiveProvider).token.isNotEmpty;
+        log(_isLoggedIn.toString(), name: "LOGGED IN");
         notifyListeners();
       }
     });

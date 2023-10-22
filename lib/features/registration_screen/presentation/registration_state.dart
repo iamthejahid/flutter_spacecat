@@ -1,40 +1,24 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
-import 'package:riverpod_ddd/features/login_page/domain/user_profile_model.dart';
+import 'package:riverpod_ddd/features/registration_screen/domain/registraionModel.dart';
 
 class RegistrationState extends Equatable {
-  RegistrationState({
-    required this.isLoading,
-    required this.userProfileModel,
-  });
-  factory RegistrationState.fromMap(Map<String, dynamic> map) {
-    return RegistrationState(
-      isLoading: (map['isLoading'] ?? false) as bool,
-      userProfileModel: UserProfileModel.fromMap(
-        map['userProfileModel'] as Map<String, dynamic>,
-      ),
-    );
-  }
-
-  factory RegistrationState.fromJson(String source) =>
-      RegistrationState.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  factory RegistrationState.init() => RegistrationState(
-        isLoading: false,
-        userProfileModel: UserProfileModel.init(),
-      );
-
   final bool isLoading;
-  final UserProfileModel? userProfileModel;
+  final RegistrationProfileModel? userProfileModel;
+  const RegistrationState({
+    required this.isLoading,
+    this.userProfileModel,
+  });
 
   @override
   List<Object?> get props => [isLoading, userProfileModel];
 
   RegistrationState copyWith({
     bool? isLoading,
-    UserProfileModel? userProfileModel,
+    RegistrationProfileModel? userProfileModel,
   }) {
     return RegistrationState(
       isLoading: isLoading ?? this.isLoading,
@@ -43,16 +27,30 @@ class RegistrationState extends Equatable {
   }
 
   Map<String, dynamic> toMap() {
-    final result = <String, dynamic>{}
-      ..addAll({'isLoading': isLoading})
-      ..addAll({'userProfileModel': userProfileModel?.toMap()});
+    return <String, dynamic>{
+      'isLoading': isLoading,
+      'userProfileModel': userProfileModel?.toMap(),
+    };
+  }
 
-    return result;
+  factory RegistrationState.fromMap(Map<String, dynamic> map) {
+    return RegistrationState(
+      isLoading: map['isLoading'] as bool,
+      userProfileModel: map['userProfileModel'] != null
+          ? RegistrationProfileModel.fromMap(
+              map['userProfileModel'] as Map<String, dynamic>)
+          : null,
+    );
   }
 
   String toJson() => json.encode(toMap());
 
+  factory RegistrationState.fromJson(String source) =>
+      RegistrationState.fromMap(json.decode(source) as Map<String, dynamic>);
+
   @override
-  String toString() =>
-      'RegistrationState(isLoading: $isLoading, userProfileModel: $userProfileModel)';
+  bool get stringify => true;
+
+  factory RegistrationState.init() => RegistrationState(
+      isLoading: false, userProfileModel: RegistrationProfileModel());
 }
