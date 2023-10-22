@@ -1,8 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:riverpod_ddd/local_cache/cache_abstract.dart';
 import 'package:riverpod_ddd/local_cache/cache_tags.dart';
 
-class CacheHandlerI implements CacheHandler {
+class CacheHandlerI with ChangeNotifier implements CacheHandler {
   // CacheHandlerI();
 
   late Box<dynamic> _cacheBox;
@@ -52,4 +53,12 @@ class CacheHandlerI implements CacheHandler {
 
   @override
   void cleanBox() => _cacheBox.clear();
+
+  @override
+  void setThemeData({required bool isWhite}) =>
+      put(KCacheTags.themeData, isWhite ? "white" : "dark");
+
+  @override
+  String get themeData =>
+      get(KCacheTags.themeData, defaultValue: 'white') ?? 'white';
 }

@@ -1,44 +1,47 @@
 // ignore_for_file: cascade_invocations
 
 import 'dart:convert';
-
 import 'package:equatable/equatable.dart';
 
 class UserProfileModel extends Equatable {
   const UserProfileModel({
     required this.userName,
-    required this.accesToken,
+    required this.token,
     required this.refreshToken,
   });
+
   factory UserProfileModel.fromMap(Map<String, dynamic> map) {
     return UserProfileModel(
       userName: (map['userName'] ?? '') as String,
-      accesToken: (map['accesToken'] ?? '') as String,
-      refreshToken: (map['refreshToken'] ?? '') as String,
+      token: Authorisation.fromMap(map['token']),
+      refreshToken: Authorisation.fromMap(map['refreshToken']),
     );
   }
-  factory UserProfileModel.init() => const UserProfileModel(
-        accesToken: '',
-        refreshToken: '',
+
+  factory UserProfileModel.init() => UserProfileModel(
+        token: Authorisation(token: ''),
+        refreshToken: Authorisation(token: ''),
         userName: '',
       );
+
   factory UserProfileModel.fromJson(String source) =>
       UserProfileModel.fromMap(json.decode(source) as Map<String, dynamic>);
+
   final String userName;
-  final String accesToken;
-  final String refreshToken;
+  final Authorisation token;
+  final Authorisation refreshToken;
 
   @override
-  List<Object> get props => [userName, accesToken, refreshToken];
+  List<Object> get props => [userName, token, refreshToken];
 
   UserProfileModel copyWith({
     String? userName,
-    String? accesToken,
-    String? refreshToken,
+    Authorisation? token,
+    Authorisation? refreshToken,
   }) {
     return UserProfileModel(
       userName: userName ?? this.userName,
-      accesToken: accesToken ?? this.accesToken,
+      token: token ?? this.token,
       refreshToken: refreshToken ?? this.refreshToken,
     );
   }
@@ -47,8 +50,8 @@ class UserProfileModel extends Equatable {
     final result = <String, dynamic>{};
 
     result.addAll({'userName': userName});
-    result.addAll({'accesToken': accesToken});
-    result.addAll({'refreshToken': refreshToken});
+    result.addAll({'token': token.toMap()});
+    result.addAll({'refreshToken': refreshToken.toMap()});
 
     return result;
   }
@@ -57,5 +60,28 @@ class UserProfileModel extends Equatable {
 
   @override
   String toString() =>
-      'UserProfileModel(userName: $userName, accesToken: $accesToken, refreshToken: $refreshToken)';
+      'UserProfileModel(userName: $userName, token: $token, refreshToken: $refreshToken)';
+}
+
+class Authorisation {
+  String? token;
+
+  Authorisation({
+    this.token,
+  });
+
+  Authorisation copyWith({
+    String? token,
+  }) =>
+      Authorisation(
+        token: token ?? this.token,
+      );
+
+  factory Authorisation.fromMap(Map<String, dynamic> map) => Authorisation(
+        token: map["token"],
+      );
+
+  Map<String, dynamic> toMap() => {
+        "token": token,
+      };
 }

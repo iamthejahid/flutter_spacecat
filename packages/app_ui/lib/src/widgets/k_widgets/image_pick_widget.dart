@@ -184,3 +184,89 @@ class ImagePickOptionWidget extends StatelessWidget {
     );
   }
 }
+
+class ImagePickerAvatar extends StatefulWidget {
+  const ImagePickerAvatar({super.key, required this.onSave});
+  final Function(File file) onSave;
+
+  @override
+  State<ImagePickerAvatar> createState() => _ImagePickerAvatarState();
+}
+
+class _ImagePickerAvatarState extends State<ImagePickerAvatar> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  File? _imageFile;
+
+  Future<void> _pickImage(ImageSource source) async {
+    final pickedFile = await ImagePicker().pickImage(source: source);
+
+    if (pickedFile != null) {
+      setState(() {
+        _imageFile = File(pickedFile.path);
+        widget.onSave(_imageFile!);
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Container(
+            height: 120,
+            width: 120,
+            decoration: BoxDecoration(
+              color: Colors.grey,
+              shape: BoxShape.circle,
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(100.r),
+              child: _imageFile != null && _imageFile!.path.isNotEmpty
+                  ? Image.file(_imageFile!)
+                  : Container(),
+            )),
+        Container(
+          height: 120,
+          width: 120,
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            shape: BoxShape.circle,
+          ),
+          child: Column(
+            children: [
+              Expanded(
+                child: Container(),
+                flex: 3,
+              ),
+              Expanded(
+                child: Row(children: [
+                  gap4,
+                  Spacer(),
+                  IconButton(
+                      onPressed: () => _pickImage(ImageSource.camera),
+                      icon: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.red, shape: BoxShape.circle),
+                          child: Icon(Icons.camera))),
+                  IconButton(
+                      onPressed: () => _pickImage(ImageSource.gallery),
+                      icon: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.red, shape: BoxShape.circle),
+                          child: Icon(Icons.photo))),
+                  Spacer(),
+                  gap4,
+                ]),
+                flex: 2,
+              )
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}

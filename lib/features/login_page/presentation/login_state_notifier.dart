@@ -24,20 +24,22 @@ class LoginStateNotifier extends StateNotifier<LoginState> {
 
   void statemaker(LoginState newState) => state = newState;
 
-  Future<void> login({required String email, required String password}) async {
+  Future<void> login({
+    required Map<String, dynamic> body,
+  }) async {
     statemaker(state.copyWith(isLoading: true));
-    final v = await _domain.login(email: email, password: password);
+    final v = await _domain.login(body: body);
     v.fold((failure) => log(failure.error), (success) async {
       statemaker(
         state.copyWith(
           userProfileModel: UserProfileModel(
             userName: success.userName,
-            accesToken: success.accesToken,
+            token: success.token,
             refreshToken: success.refreshToken,
           ),
         ),
       );
-      _ref.watch(hiveProvider).setToken(token: success.accesToken);
+      _ref.watch(hiveProvider).setToken(token: success.token.token!);
       // await Future.delayed(Duration(seconds: 3));
       _ref.watch(routerProvider).goNamed(HomeScreen.name);
     });

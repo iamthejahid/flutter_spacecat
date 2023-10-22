@@ -1,0 +1,11 @@
+{
+  "@@locale": "ar",
+  "@counterAppBarTitle": {
+    "description": "Text shown in the AppBar of the Counter Page"
+  },
+  "counterAppBarTitle": "Counter",
+  "login": "تسجيل الدخول",
+  "not_registered": "غير مسجّل؟ سجّل",
+  "password": "كلمة المرور",
+  "phoneNumber": "\"رقم الهاتف"
+}

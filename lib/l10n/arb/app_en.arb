@@ -1,7 +1,11 @@
 {
-    "@@locale": "en",
-    "counterAppBarTitle": "Counter",
-    "@counterAppBarTitle": {
-        "description": "Text shown in the AppBar of the Counter Page"
-    }
+  "@@locale": "en",
+  "@counterAppBarTitle": {
+    "description": "Text shown in the AppBar of the Counter Page"
+  },
+  "counterAppBarTitle": "Counter",
+  "login": "Login",
+  "not_registered": "Not Registered? Sign up",
+  "password": "Password",
+  "phoneNumber": "Phone number"
 }

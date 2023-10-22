@@ -15,6 +15,12 @@ abstract class CacheHandler {
 
   // Theme Data
 
+  void setThemeData({required bool isWhite});
+
+  String get themeData;
+
+  // Token
+
   String get token;
   void setToken({required String token});
 }
